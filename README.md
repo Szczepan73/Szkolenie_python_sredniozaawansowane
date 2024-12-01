@@ -36,5 +36,20 @@ jakoś pomóc. Ewentualna pomoc
 11. Git push na repo dostępne dla wszystkich
 12. Wróć do punktu 1
 
+
 ### Dane do hostów:
 
+| ID 	| IMIE        	| PUBLIC IP ADDRESS 	|
+|----	|-------------	|-------------------	|
+| 1  	| Małgorzata  	| 20.215.42.171     	|
+| 2  	| Michał      	| 20.215.42.172     	|
+| 3  	| Marcin      	| 20.215.42.173     	|
+| 4  	| Dominik     	| 20.215.42.174     	|
+| 5  	| Włodzimierz 	| 20.215.42.175     	|
+| 6  	| Edyta       	| 20.215.41.241     	|
+| 7  	| Mateusz     	| 20.215.42.176     	|
+| 8  	| Dariusz     	| 20.215.42.177     	|
+| 9  	| Magdalena   	| 20.215.42.178     	|
+| 10 	| Łukasz      	| 20.215.42.179     	|
+| 11 	| Aleksandra  	| 20.215.42.180     	|
+| 12 	| Mariusz     	| 20.215.42.181     	|
