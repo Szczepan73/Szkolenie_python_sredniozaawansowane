@@ -15,7 +15,7 @@ if __name__ == '__main__':
     # list_BAD_example = [1, 2, 3, "napis", 3.5, 'a']
 
     list_example = [1, 2, 3, 4, 5, 6, 7]
-    list_example2 = list()
+    list_example2 = list() # []
 
     print(list_example)
 
@@ -26,8 +26,8 @@ if __name__ == '__main__':
     print(list_example[-1])
     print(list_example[len(list_example) - 1])
 
-    #print(list_example[len(list_example)])  # IndexError: list index out of range
-    print(list_example[1:3])
+    # print(list_example[len(list_example)])  # IndexError: list index out of range
+    print(list_example[1:3])    # [1, 2, 3, 4, 5, 6, 7, 5]
     print(list_example[:3])
     print(list_example[2:])
     print(list_example[:-3])
@@ -43,3 +43,7 @@ if __name__ == '__main__':
 
     for i in range(10):
         print(i)
+
+    #  Stwórz dwie listy. Każda z list ma zawierać 10 liczb losowych z zakresu 1-10. Wypisz listy na konosole raz z uzyciem petli
+    #  drugi raz z uzyciem funkcji print
+
