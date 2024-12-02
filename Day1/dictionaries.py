@@ -106,3 +106,13 @@ if __name__ == '__main__':
 
     print(studenci)
 
+    ###############
+
+    nazwiska = ['Kowalski', 'Nowak', 'Zielinski', 'Wiśniewska', 'Wojcik']
+    dlugosci_nazwisk = {nazwisko: len(nazwisko) for nazwisko in nazwiska if len(nazwisko) > 6}
+    print(dlugosci_nazwisk)
+
+    #  Znajdź studentów, którzy mają średnią ocenę powyżej 4.0, stworz słownik id: słownik
+    # studenci.items()  ---> klucz i wartosc    wartosc['kluczem']
+
+
