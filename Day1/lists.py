@@ -132,3 +132,102 @@ if __name__ == '__main__':
     # a następnie posortuje te listę (bez tworzenia nowej). Następnie przefiltruja ta listę (tworząc nową) tak aby zawierała tylko liczby nieparzyste
     list1 = [3, 7, 1, 9, 15]
     list2 = [10, 2, 8, 6, 4]
+
+    list1.extend(list2)
+    if 10 in list1:
+        print("Liczba 10 znajduje się w połączonej liście.")
+    else:
+        print("Liczba 10 nie znajduje się w połączonej liście.")
+    list1.sort()
+
+    odd_numbers = [num for num in list1 if num % 2 != 0]
+
+    print(odd_numbers)
+
+
+    napis = "Litery RoZnej WIelKOSCI"
+    print(napis.lower())
+
+    for root, dirs, files in os.walk('E:\PythonKurs_2_12_2024'):
+        print(f'Root: {root}, folder: {dirs}, file: {files}')
+
+
+    # Napisz wyszukiwarkę plików która
+    # przyjmie od użytkownika szukaną frazę i katalog startowy. Wyszukiwarka ma wyswietlić
+    # wszystkie pliki i katalogi zawierajace w nazwie szukaną frazę - wraz ze ścieżkami.
+    # Wyszukiwarka ma być nieczuła na wielkość liter
+
+    starting_folder = "E:\PythonKurs_2_12_2024"
+    searched_text = ".Py"
+    #searched_text = input()
+
+    found = []
+    searched_text = searched_text.lower()
+
+    for root, dirs, files in os.walk(starting_folder):
+        for element in dirs + files:
+            if searched_text in element.lower():
+                found.append(os.path.join(root, element))
+
+    print(found)
+
+
+    # searched_text = searched_text.lower()
+    # found = [os.path.join(root, element)
+    #          for root, dirs, files in os.walk(starting_folder)
+    #          for element in dirs + files
+    #          if searched_text in element.lower()]
+
+    #############################
+
+    list_5 = [1, 2, 3, 4, 4, 4, 5, 6, 7, 8, 9, 12]
+
+    print(f'Fours: {list_5.count(4)}')
+    print(f'Index of 12: {list_5.index(12)}')
+    list_5.clear()
+
+    # Built in functions  len, sum, min, max
+    list_6 = [1, 2, 3, 4, 4, 4, 5, 6, 7, 8, 9, 12]
+
+    len_of_list_6 = len(list_6)
+    sum_of_list_6 = sum(list_6)
+    min_of_list_6 = min(list_6)
+    max_of_list_6 = max(list_6)
+    print(f"Min: {min_of_list_6}, max: {max_of_list_6}, sum: {sum_of_list_6}")
+
+    # revers with slicing [::-1]
+    revers_6 = list_6[::-1]    # [start:stop:step]
+    print(revers_6)
+
+    every_second_element = list_6[::2]
+    print(every_second_element)
+
+    ############################### Krotki - tuple
+
+    krotka = ("Wojtek", 30, 5.0)
+    print(krotka)
+    print(krotka[0])
+
+    # krotka[0] = "Jan"
+
+
+    def funkcje():
+        return "wynik", 123, "sciezka"
+
+
+    result = funkcje()
+    print(f'Value: {result}, type: {type(result)}')
+
+    napis, liczba, sciezka = funkcje()
+    # napis, liczba, sciezka = result
+    liczba += 1
+    # result[1] += 1 # TypeError: 'tuple' object does not support item assignment
+
+    krotka = tuple(random.randint(0, 10) for i in range(10))
+    generator = (random.randint(0, 10) for i in range(10))  ### to nie jest krotka
+
+    print(krotka)
+    lista_z_krotki = list(krotka)
+    print(lista_z_krotki)
+    krotka_z_listy = tuple(lista_z_krotki)
+    print(krotka_z_listy)
