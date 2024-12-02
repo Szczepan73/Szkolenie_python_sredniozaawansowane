@@ -88,3 +88,42 @@ if __name__ == '__main__':
     print(random_list_4)
 
     # Napisz kod który umieści w liście 10 kolejnych potęg liczby 2 uzywajac list składanych. 2 ** 2 = 4, 2 ** 3 = 8
+    power_of_2 = [2 ** i for i in range(10)]
+    print(power_of_2)
+
+    power_of_2 = [(i, 2 ** i) for i in range(10)]
+    print(power_of_2)
+
+    ################################
+
+    list1 = [0, 1, 2]
+    list2 = [3, 4, 5]
+
+    list_of_lists = [list1, list2]
+    print(list_of_lists)
+
+    zero_value = list_of_lists[0][0]
+    print(zero_value)
+    list_of_lists_of_lists = [[[1, 3], [3, 4]], [[32, 43]]]
+
+    guest_list = ["Michael Scofield", "Lincoln Burrows", "TheodoreBagwell", "Uczciwy Polityk", "Andrzej Klusiewicz"]
+    if ("Uczciwy polityk" in guest_list):
+        print("Found")
+    else:
+        print("Ooops not here")
+
+    random_list_comp_2 = [random.randint(1, 10) for i in range(10)]
+    print(f'Przed sortowaniem: {random_list_comp_2}')
+    random_list_comp_2.sort()
+    print(f'Po sortowaniu: {random_list_comp_2}')
+    random_list_comp_2.reverse()
+    print(f'Odwrotnie: {random_list_comp_2}')
+
+    random_list_comp_3 = [random.randint(1, 10) for i in range(10)]
+    posortowane = sorted(random_list_comp_3)
+    odwrotnie = sorted(random_list_comp_3, reverse=True)
+    print(posortowane)
+    print(odwrotnie)
+
+    filtered = [e for e in posortowane if e % 2 == 0]
+    print(f"Only even {filtered}")
