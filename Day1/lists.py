@@ -244,3 +244,7 @@ if __name__ == '__main__':
     # bardziej skomplikowane struktury danych kopia gleboka
     import copy
     copy.deepcopy(list_of_lists_of_lists)
+
+    # przyslanianie nazw
+    # min = min(list_6)
+    # min2 = min(list7_copy)

@@ -58,4 +58,44 @@ if __name__ == '__main__':
 
     # wczytaj dane do słownika w ten sposób by pierwsza kolumna stanowila klucze a
     # druga przypisane do nich wartości. Przeiteruj po słowniku i wypisz klucze oraz przypisane do nich wartości
+    ustawienia = {}
+
+    with open("ustawienia.txt", "r") as file:
+        for line in file:
+            line = line.strip().split(';')
+            if len(line) == 2:
+                key, value = line
+                ustawienia[key] = value
+
+    for key, value in ustawienia.items():
+        print(f'Klucz: {key}, wartosc: {value}')
+
+
+    ###########################################
+
+
+    studenci = {
+        1001: {'imie': 'Jan', 'nazwisko': 'Kowalski', 'wiek': 21, 'oceny': [4, 3, 5, 4]},
+        1002: {'imie': 'Anna', 'nazwisko': 'Nowak', 'wiek': 22, 'oceny': [5, 5, 4, 5]},
+        1003: {'imie': 'Marek', 'nazwisko': 'Zielinski', 'wiek': 23, 'oceny': [3, 4, 2, 3]},
+        1004: {'imie': 'Zofia', 'nazwisko': 'Wiśniewska', 'wiek': 20, 'oceny': [4, 4, 4, 4]},
+        1005: {'imie': 'Krzysztof', 'nazwisko': 'Wojcik', 'wiek': 24, 'oceny': [2, 3, 2, 3]}
+    }
+
+    studenci[1006] = {'imie': 'Krzysztof2', 'nazwisko': 'Wojcik', 'wiek': 26, 'oceny': [4, 3, 3, 3, 4, 5]}
+
+
+    list_of_names = [studenci[id]['imie'] for id in studenci]
+    print(list_of_names)
+
+
+    # imie studenta i jego najwysza ocena
+    for id_studenta in studenci:
+        oceny = studenci[id_studenta]['oceny']
+        najwysza_ocena = max(oceny)
+        print(f"{studenci[id_studenta]['imie']}  - max ocena {najwysza_ocena}")
+
+
+    #  Oblicz średnią ocenę dla każdego studenta i dodaj ją do ich słownika
+
 
