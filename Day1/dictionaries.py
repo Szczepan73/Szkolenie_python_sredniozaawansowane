@@ -114,5 +114,46 @@ if __name__ == '__main__':
 
     #  Znajdź studentów, którzy mają średnią ocenę powyżej 4.0, stworz słownik id: słownik
     # studenci.items()  ---> klucz i wartosc    wartosc['kluczem']
+    studenci_pow_4 = {id_studenta: dane for id_studenta, dane in studenci.items() if dane['srednia_ocen'] > 4.0}
+    print(studenci_pow_4)
 
 
+    ######################################################
+
+
+    # lambda argumenty : wyrażenie
+    p = lambda argumenty: print(argumenty)
+    p("moj napis")
+
+    # Tak nie robić !!! to juz za duzo na lambde
+    calculate = lambda x, y: x + y if x > y else x - y
+    print(calculate(5, 10))
+
+
+    # lepiej tak
+    def calculate(x, y):
+        if x > y:
+            return x + y
+        else:
+            return x - y
+
+
+    liczby = [1, 2, 3, 4, 5]
+    powers = list(map(lambda x: x ** 2, liczby))    # for element in list: wywolja_funkcje(element)
+    print(powers)
+
+    #########
+    najgorszy_student = min(studenci.items(), key=lambda klucz_i_wartosc: klucz_i_wartosc[1]['srednia_ocen'])   # (klucz, wartosci)
+    print(najgorszy_student)
+    studenci.pop(najgorszy_student[0])
+    print("Studenci po usunięciu najgorszego:", studenci)
+
+    employees = [
+        {"name": "John", "salary": 50000},
+        {"name": "Jane", "salary": 55000},
+        {"name": "Jim", "salary": 60000}
+    ]
+
+    # uzupelnij
+    highest_salary_employee = max(employees, key=)
+    print(highest_salary_employee)
