@@ -231,3 +231,16 @@ if __name__ == '__main__':
     print(lista_z_krotki)
     krotka_z_listy = tuple(lista_z_krotki)
     print(krotka_z_listy)
+
+
+    # kopie glebokie listy
+    list7 = list_6[::1] # kopia gleboka
+    list7_copy = list(list_6) # kopia gleboka
+    list7[0] = 100000
+
+    print(list_6)
+    print(list7)
+
+    # bardziej skomplikowane struktury danych kopia gleboka
+    import copy
+    copy.deepcopy(list_of_lists_of_lists)
