@@ -107,7 +107,7 @@ if __name__ == '__main__':
     list_of_lists_of_lists = [[[1, 3], [3, 4]], [[32, 43]]]
 
     guest_list = ["Michael Scofield", "Lincoln Burrows", "TheodoreBagwell", "Uczciwy Polityk", "Andrzej Klusiewicz"]
-    if ("Uczciwy polityk" in guest_list):
+    if "Lincoln Burrows" in guest_list:
         print("Found")
     else:
         print("Ooops not here")
@@ -127,3 +127,8 @@ if __name__ == '__main__':
 
     filtered = [e for e in posortowane if e % 2 == 0]
     print(f"Only even {filtered}")
+
+    # Napisz kod który połączy 2 listy podane poniżej, sprawdzi czy liczba 10 znajduje sie w nowej połączonej liście (wypisz odpowiedni komunikat),
+    # a następnie posortuje te listę (bez tworzenia nowej). Następnie przefiltruja ta listę (tworząc nową) tak aby zawierała tylko liczby nieparzyste
+    list1 = [3, 7, 1, 9, 15]
+    list2 = [10, 2, 8, 6, 4]
