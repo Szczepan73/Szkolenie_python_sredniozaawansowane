@@ -97,5 +97,12 @@ if __name__ == '__main__':
 
 
     #  Oblicz średnią ocenę dla każdego studenta i dodaj ją do ich słownika
+    # studenci[id_studenta]['srednia_ocen'] = 4.5
 
+    for id_studenta in studenci:
+        oceny = studenci[id_studenta]['oceny']
+        srednia = sum(oceny) / len(oceny)
+        studenci[id_studenta]['srednia_ocen'] = srednia
+
+    print(studenci)
 
