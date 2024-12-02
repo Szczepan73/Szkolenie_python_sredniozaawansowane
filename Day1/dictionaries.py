@@ -2,6 +2,7 @@ import operator
 import random
 import os
 import re
+from audioop import reverse
 from collections import defaultdict
 
 
@@ -144,6 +145,10 @@ if __name__ == '__main__':
 
     #########
     najgorszy_student = min(studenci.items(), key=lambda klucz_i_wartosc: klucz_i_wartosc[1]['srednia_ocen'])   # (klucz, wartosci)
+
+    najgorszy_student_2 = min(studenci,
+                            key=lambda klucz: studenci[klucz]['srednia_ocen'])
+
     print(najgorszy_student)
     studenci.pop(najgorszy_student[0])
     print("Studenci po usunięciu najgorszego:", studenci)
@@ -155,5 +160,95 @@ if __name__ == '__main__':
     ]
 
     # uzupelnij
-    highest_salary_employee = max(employees, key=)
+    highest_salary_employee = max(employees, key=lambda element_listy: element_listy['salary'])
     print(highest_salary_employee)
+
+
+    # Posortuj studentów według nazwiska - sorted
+    studenci_posortowani = dict(   sorted(studenci.items(), key=lambda item: item[1]['nazwisko'], reverse=True)  )
+
+    for key in studenci_posortowani:
+        print(f'{key}: {studenci_posortowani[key]}')
+
+    ############### Sets - zbiory / zestawy
+    list1 = [1, 2, 3, 4, 5, 5]
+    list2 = [4, 5, 6, 7, 8]
+
+    # Convert lists into sets
+    set1 = set(list1)
+    set2 = set(list2)
+
+    print(list1)
+    print(set1)
+
+    # Perform set operations
+    union_set = set1.union(set2)
+    intersection_set = set1.intersection(set2)
+    difference_set1 = set1.difference(set2)
+    difference_set2 = set2.difference(set1)
+    symmetric_difference_set = set1.symmetric_difference(set2)
+
+    # Display the results
+    print("Union:", union_set)
+    print("Intersection:", intersection_set)
+    print("Difference of Set 1 - Set 2:", difference_set1)
+    print("Difference of Set 2 - Set 1:", difference_set2)
+    print("Symmetric Difference:", symmetric_difference_set)
+
+
+
+
+    # https://www.pythonmorsels.com/time-complexities/
+    # https://realpython.com/python-data-structures/
+
+
+
+
+
+    nazwa_pliku = 'text.txt'
+    wystapienia = {}
+    # Defining the dict
+    wystapienia2 = defaultdict(int)  # from collections import defaultdict
+
+    with open(nazwa_pliku, "r", encoding='utf-8') as plik:
+        for linia in plik:
+            linia_wyczyszczona = re.sub(r'\W+', ' ', linia)
+            slowa = linia_wyczyszczona.lower().split()
+            for slowo in slowa:
+                wystapienia2[slowo] += 1
+                # if slowo in wystapienia:  # https://www.geeksforgeeks.org/defaultdict-in-python/
+                #     wystapienia[slowo] += 1
+                # else:
+                #     wystapienia[slowo] = 1
+
+    print(wystapienia2)
+
+    posortowane_wystapienia = dict(sorted(wystapienia2.items(), key=lambda x: x[1], reverse=True))
+    print(posortowane_wystapienia)
+
+
+
+    # Masz listę zawierającą informacje o pracownikach w firmie. Każdy pracownik jest reprezentowany przez słownik zawierający jego imię, wiek, dział i wynagrodzenie. Twoim zadaniem jest przeanalizowanie tych danych i wykonanie kilku operacji na tej liście.
+    #
+    # pracownicy = [
+    #     {'imie': 'Jan', 'wiek': 28, 'dzial': 'IT', 'wynagrodzenie': 7000},
+    #     {'imie': 'Anna', 'wiek': 34, 'dzial': 'HR', 'wynagrodzenie': 5000},
+    #     {'imie': 'Marek', 'wiek': 45, 'dzial': 'IT', 'wynagrodzenie': 8000},
+    #     {'imie': 'Zofia', 'wiek': 29, 'dzial': 'Marketing', 'wynagrodzenie': 6000},
+    #     {'imie': 'Krzysztof', 'wiek': 31, 'dzial': 'IT', 'wynagrodzenie': 7200},
+    #     {'imie': 'Agnieszka', 'wiek': 26, 'dzial': 'HR', 'wynagrodzenie': 4800},
+    #     {'imie': 'Paweł', 'wiek': 38, 'dzial': 'Marketing', 'wynagrodzenie': 6500}
+    # ]
+    #
+    #
+    # 1. Utwórz listę zawierającą imiona wszystkich pracowników
+    # 2. Oblicz średnie wynagrodzenie pracowników
+    # 3. Znajdź pracowników z działu 'IT' i utwórz ich osobną listę
+    # 4. Posortuj listę pracowników według wieku rosnąco
+    # 5. Odwróć listę pracowników
+    # 6. Sprawdź, czy istnieje pracownik o imieniu 'Anna' na liście
+    # 7. Dodaj nowego pracownika do listy
+    # 8. Usuń pracownika z najniższym wynagrodzeniem z listy
+    # 9. Zaktualizuj wynagrodzenie wszystkich pracowników z działu 'HR', podnosząc je o 10%
+    # 10. Wyczyść listę pracowników
+
