@@ -7,6 +7,7 @@ from collections import defaultdict
 from datetime import datetime
 import time
 import functools
+from operator import truediv
 from typing import Callable, Tuple, List, Union
 
 
@@ -191,9 +192,61 @@ if __name__ == '__main__':
     # argumentu a druga jego wartoscia. Jesli dane argument juz istnieje w pliku to trzeba bedzie tylko zaktualizowac
     # jego wartosc, jesli jeszcze go nie ma to trzeba go bedzie dodac do pliku.
 
+    def config(filename, **params):
+        loaded_config = {}
+        with open(filename, mode="r", encoding='utf-8') as file:
+            for line in file:
+                if line.isspace():
+                    continue
+                key, value = line.split(';')
+                loaded_config[key] = value
 
+        for p in params:
+            loaded_config[p] = params[p]
 
+        with open(filename, mode="w", encoding='utf-8') as file:
+            for p in loaded_config:
+                file.write(f'{p};{loaded_config[p]}\n')
 
 
     config("plik.csv", wersja=1, arg=2, argument321=3, parametr1="wartość 2")
     config("plik.csv", arg_inny=2, argument321=10, wersja=2.0)
+
+    config("plik.csv", arg=4, argument321=12, wersja=3.0)
+
+
+    ##############################################
+
+    def zewnetrzna(x):
+
+        def wewnetrzna(y):
+            return y * 2
+
+        print(wewnetrzna(x))
+        return 1
+
+    print(zewnetrzna(x=543))
+
+
+    # funkcja zwracajaca funkcje
+    def outer(x):
+
+        def inner(y):
+            return x + y
+
+        return inner
+
+
+    dodaj_dwa = outer(2)
+    wynik = dodaj_dwa(7)
+    wynik = dodaj_dwa(321)
+    print(wynik)
+
+    # Napisz funkcje która będzie tworzyła listę liczb parzystych lub nieparzystych w danym zakresie
+    # funkcje do sprawdzenia parzystosci napisz jako funckje wewnętrzne i w zależności
+    # od przekazanego parametru wywołuj odpowiednią
+    # range(start, koniec)
+    def generuj_liczby(start: int = 0, koniec: int = 10, parzyste: bool = True) -> list[int]:
+
+
+
