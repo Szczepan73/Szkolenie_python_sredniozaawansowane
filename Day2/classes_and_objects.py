@@ -569,20 +569,25 @@ for f in figury:
     print(f.area())
     f.drawing()
 
-
+print("*" * 50)
 
 # zmien klase animal na klase abstrakcyjna
 # zmien metode speak na metode abstrakcyjna
-# dodaj interfejs ILiveOn ktore bedzie posiadał funkcje abstrakcyjna where_I_live()
-# dodac interfejs do klas pochodnych klasy animal
+# dodaj interfejs ILiveOn ktory bedzie posiadał funkcje abstrakcyjna where_I_live()
+# dodac interfejs do klas pochodnych klasy animal (odziedziczyć klase interfesju i zaimplementować metode abstrakcyjna w klasach pochodnych)
+
+class ILiveOn(ABC):
+    @abstractmethod
+    def where_I_live(self): ...
 
 
-class Animal():
+class Animal(ABC):
     def __init__(self, name):
         self.name = name
 
+    @abstractmethod
     def speak(self):
-        print("mowie")
+        pass
 
     def eat(self):
         print("eating")
@@ -591,21 +596,26 @@ class Animal():
         return f'My name is {self.name}'
 
 
-class Dog(Animal):
+class Dog(Animal, ILiveOn):
     def speak(self):
         print(f"{self.name} barks")
 
+    def where_I_live(self):
+        print("In dog house outside")
 
-class Cat(Animal):
+
+class Cat(Animal,ILiveOn):
     def speak(self):
         print(f"{self.name} meows")
 
+    def where_I_live(self):
+        print("In my owner bed")
 
-animal = Animal("Generic Animal") # !!!!
+#animal = Animal("Generic Animal") # !!!!
 dog = Dog("Buddy")
 cat = Cat("Whiskers")
 
-animal.speak() # !!!!
+#animal.speak() # !!!!
 dog.speak()
 cat.speak()
 cat.eat()
@@ -617,3 +627,133 @@ for zwierze in lista_zwierzat:
     zwierze.where_I_live()
     zwierze.eat()
     print(zwierze)
+
+
+print("*" * 50)
+
+###########################
+
+
+################################## Example of mixin
+
+class BorrowableMixin:
+    def __init__(self):
+        self._borrowed = False
+
+    def borrow(self):
+        if self._borrowed:
+            raise Exception("Item already borrowed")
+        self._borrowed = True
+
+    def return_item(self):
+        if not self._borrowed:
+            raise Exception("Item not borrowed")
+        self._borrowed = False
+
+    def is_borrowed(self):
+        return self._borrowed
+
+
+class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+
+    def info(self):
+        return f"Book: {self.title} by {self.author}"
+
+
+class DVD:
+    def __init__(self, title, director):
+        self.title = title
+        self.director = director
+
+    def info(self):
+        return f"DVD: {self.title}, directed by {self.director}"
+
+
+class BorrowableBook(Book, BorrowableMixin):
+    def __init__(self, title, author):
+        Book.__init__(self, title, author)
+        BorrowableMixin.__init__(self)
+
+class BorrowableDVD(DVD, BorrowableMixin):
+    def __init__(self, title, director):
+        DVD.__init__(self, title, director)
+        BorrowableMixin.__init__(self)
+
+
+book = BorrowableBook("1984", "George Orwell")
+dvd = BorrowableDVD("Inception", "Christopher Nolan")
+
+print(book.info())
+book.borrow()
+print(f"Czy jest wypozyczona {book.is_borrowed()}")
+book.return_item()
+print(f"Czy jest wypozyczona {book.is_borrowed()}")
+
+
+# Python używa algorytmu C3 linearization (MRO - Method Resolution Order) do ustalania kolejności przeszukiwania klas bazowych.
+class A:
+    def do_something(self):
+        print("A")
+
+class B(A):
+    def do_something(self):
+        print("B")
+        super().do_something()
+
+class C(A):
+    def do_something(self):
+        print("C")
+        super().do_something()
+
+class D(B, C):
+    pass
+    def do_something(self):     # co jesli D nie bedzie miala takiej metody
+        print("D")
+        super().do_something()
+
+
+d = D()
+d.do_something()
+
+# Analiza MRO:
+# Klasa D dziedziczy po B i C:
+#
+# Kolejność bazowa w definicji klasy to B, potem C.
+# C3 Linearization dla D:
+#
+# Startujemy od D: [D]
+# Dodajemy MRO klasy B: [B, A, object]
+# Dodajemy MRO klasy C: [C, A, object]
+# Łączymy te listy zgodnie z zasadą C3:
+#
+# D -> B -> C -> A -> object
+
+print(D.mro())
+
+
+
+
+class X:
+    pass
+
+class Y(X):
+    pass
+
+class Z(Y):
+    pass
+
+# class W(Y, Z):  # Hierarchia jest niezgodna
+#     pass
+
+class V(Z, Y):  # Hierarchia jest zgodna
+    pass
+# TypeError: Cannot create a consistent method resolution order (MRO) for bases Y, Z
+
+
+
+
+
+
