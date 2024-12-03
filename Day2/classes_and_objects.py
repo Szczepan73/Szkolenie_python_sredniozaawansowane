@@ -119,7 +119,7 @@ class Rectangle:
         return self._a
 
     @dlugosc_a.setter
-    def a(self, value):
+    def dlugosc_a(self, value):
         print("Set a")
         self._a = value
 
