@@ -60,9 +60,16 @@ class Samochod:
     def wypiszMnie(self):
         print(self.marka, self.model, self.rejestracja)
 
+    def __repr__(self):
+        return f'Samochod("{self.marka}", "{self.model}", "{self.rejestracja}")'
+
+    def __str__(self):
+        return f'Samochod: {self.marka}, {self.model}, {self.rejestracja},'
+
 
 s = Samochod("Skoda", "Octawia", 'WS124')
 s2 = Samochod("Toyota", "Yaris", 'WWL642')
 
 s.wypiszMnie()
 
+print(f'Moj wspaniały samochód {s2}')
