@@ -189,9 +189,18 @@ if __name__ == '__main__':
 
 
     # Stwórz dekorator, który sprawdza, czy użytkownik ma odpowiednie uprawnienia do wywołania funkcji. Jeśli nie, wyświetli komunikat o braku dostępu.
+    def check_permissions(required_permission: str):
+        def decorator(func):
+            @functools.wraps(func)
+            def wrapper(user: dict[str,str], *args, **kwargs):
+                if user.get('permission') == required_permission:
+                    return func(user, *args, **kwargs)
+                else:
+                    print("Brak uprawnień do wykonania tej funkcji")
 
+            return wrapper
 
-
+        return decorator
 
 
 
@@ -211,3 +220,36 @@ if __name__ == '__main__':
     admin_function(user2)  # Output: Brak uprawnień do wykonania tej funkcji
     user_function(user2)  # Output: Witaj, użytkowniku!
     user_function(user1)  # Output: Brak uprawnień do wykonania tej funkcji
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # https://realpython.com/primer-on-python-decorators/#more-real-world-examples
+    # https://refactoring.guru/pl/design-patterns/catalog
+    # https://github.com/lord63/awesome-python-decorator
