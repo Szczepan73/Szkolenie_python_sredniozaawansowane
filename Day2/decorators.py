@@ -179,7 +179,7 @@ if __name__ == '__main__':
         return sleeper_decorator
 
 
-    @sleeper(sleep_time=2.5)                          #  dekorator =  sleeper(sleep_time=2.5)
+    @sleeper(sleep_time=0.1)                          #  dekorator =  sleeper(sleep_time=2.5)
                                                       #  slow_add = dekortor( slow_add )
     def slow_add(a: float, b: float) -> float:
         return a + b
@@ -222,31 +222,72 @@ if __name__ == '__main__':
     user_function(user1)  # Output: Brak uprawnień do wykonania tej funkcji
 
 
+    def timeit(repeats: int = 10):
+        def decorator(func):
+            @functools.wraps(func)
+            def wrapper(*args, **kwargs):
+                times = []
+                for _ in range(repeats):
+                    start_time = time.time()
+                    result = func(*args, **kwargs)
+                    end_time = time.time()
+                    times.append(end_time - start_time)
+
+                avg_time = statistics.mean(times)
+                std_dev = statistics.stdev(times) if len(times) > 1 else 0.0
+
+                print(f"Function '{func.__name__}' executed {repeats} times.")
+                print(f"Average execution time: {avg_time:.6f} seconds")
+                print(f"Standard deviation: {std_dev:.6f} seconds")
+
+                return result
+
+            return wrapper
+
+        return decorator
+
+
+    @timeit(repeats=50)
+    def slow_function(seconds):
+        print(f"Sleeping for {seconds} seconds...")
+        time.sleep(seconds)
+        return f"Slept for {seconds} seconds"
+
+
+    # print(slow_function(0.1))
 
 
 
+    def cache(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            cache_key = args + tuple(kwargs.values())
+            if cache_key not in wrapper.cache_dict:
+                wrapper.cache_dict[cache_key] = func(*args, **kwargs)
+                return wrapper.cache_dict[cache_key]
+            else:
+                print("Using cached value")
+                return wrapper.cache_dict[cache_key]
+
+        wrapper.cache_dict = {}
+        return wrapper
 
 
+    @cache
+    def mnozenie(a: float, b: float) -> float:
+        print(f'Wynik: {a * b}')
+        return a * b
 
 
+    mnozenie(2, 2)
+    mnozenie(2, 2)
 
+    mnozenie(2, 3)
+    mnozenie(3, 2)
 
+    mnozenie(b=3, a=2)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print(mnozenie.cache_dict)
 
 
 
