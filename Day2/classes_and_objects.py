@@ -18,6 +18,12 @@ class Osoba(object):
     def wypiszMnie(self):
         print(self.imie, self.nazwisko, self.wiek)
 
+    def __str__(self):
+        return f'Cześć jestem: {self.imie}, {self.nazwisko}, {self.wiek}'
+
+    def __repr__(self):
+        return f"Osoba({self.imie, self.nazwisko, self.wiek})"
+
 
 o = Osoba("Wojtek", "Dudzik", 31)
 o2 = Osoba("Jan", "Nowak", 25)
@@ -35,9 +41,28 @@ lista_osob = [o, o2, o3]
 for osoba in lista_osob:
     osoba.wypiszMnie()
 
+print(o3)
+napis = str(o3)
+print(napis)
 
 #     Stwórz klasę "Samochod" posiadającą pola "marka", "model", "rejestracja".
 #     Klasa ta powinna zawierać też metodę "wyswietl" wypisującą dane z obiektu na konsoli
 #     Stwórz dwa obiekty tej klasy i korzystajac  z metody "wyświetl" wyswietl na konsoli ich zawartość.
 
+# dopisz metody __str__ i __repr__ do klasy samochod
+class Samochod:
+
+    def __init__(self, marka: str, model:str, rejestracja: str):
+        self.marka = marka
+        self.model = model
+        self.rejestracja = rejestracja
+
+    def wypiszMnie(self):
+        print(self.marka, self.model, self.rejestracja)
+
+
+s = Samochod("Skoda", "Octawia", 'WS124')
+s2 = Samochod("Toyota", "Yaris", 'WWL642')
+
+s.wypiszMnie()
 
