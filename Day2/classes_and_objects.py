@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 import pandas as pd
-from functools import total_ordering   # fills in missing comparison methods (<, <=, >, >=) based on just two: either __eq__ and one other comparison method like __lt__ or __gt__.
+from functools import total_ordering, cached_property   # fills in missing comparison methods (<, <=, >, >=) based on just two: either __eq__ and one other comparison method like __lt__ or __gt__.
 
 
 class Osoba(object):
@@ -133,12 +133,102 @@ print(f'Rectangle {r.dlugosc_a}, {r.b}')
 
 
 # Stwórz klasę Zawodnik posiadającą pola wzrost i masa, imie. Pola te mają być uzupełniane przy tworzeniu obiektu.
-# stworz atrybut BMI który będzie tylko do odczytu
-# Powołaj do życia obiekt tej klasy i wyświetl na konsoli obliczone BMI.
 # Wzrost jest atrybutem prywatnym (__wzrost)
-# Waga może być zmieniana ale też jako atrybut z wykorzystaniem dekoratora @property
-# waga ma być atrybutem chronionym (_waga)
+# masa i imie są atrybutami chronionymi (_masa, _imie)
+# stwórz właściwość Waga która będzie wykorzystywać atrybut _masa
+# właściwość Waga może być zmieniana ale tyklo z wykorzystaniem dekoratora @property
+# stworz właściwość BMI który będzie tylko do odczytu
 # wzor na bmi = masa / (wzrost ** 2)   wzrost podany w metrach 1.84
 # dodac metode __str__
+# Powołaj do życia obiekt tej klasy i wyświetl na konsoli obliczone BMI.
+
+class Zawodnik:
+    def __init__(self, wzrost: float, masa: float, imie: str):
+        self.__wzrost = wzrost
+        self._masa_zawodnika = masa
+        self._imie = imie
+
+    @cached_property
+    def BMI(self) -> float:
+        return self._masa_zawodnika / (self.__wzrost ** 2)
+
+    @property
+    def waga(self) -> float:
+        return self._masa_zawodnika
+
+    @waga.setter
+    def waga(self, value: float):
+        self._masa_zawodnika = value
+        # self.nowe_pole = "jakas wartosc"
+
+    def __str__(self):
+        return f'Zawodnik: {self._imie}, o BMI={self.BMI:.3f}'
+
+    @staticmethod
+    def nie_uzywam_atrybutow(info: str):
+        print(info)
 
 
+    @classmethod
+    def create_from_string(cls, text: str):
+        dane = text.strip().split(';')
+        if len(dane) == 3:
+            wzrost_cm, waga_lbs, imie = dane
+            z = cls(wzrost=int(wzrost_cm) / 100, masa=int(waga_lbs) * 0.454, imie=imie)
+            return z
+
+
+    # odczytali dane z pliku dane.txt
+    # zbudowali sobie liste zawodnikow (jako obietky klasy) przy uzyciu  @classmethod
+
+
+
+
+    # zła praktyka
+    # def dodaj_atrybut_nazwisko(self, nazwisko:str):
+    #     self.nazwisko = nazwisko
+
+
+z = Zawodnik(1.8, 80, "Jan")
+
+print(z)
+z.waga = 75
+print(z)
+
+liczba_str = "80"
+liczba_float = float(liczba_str)
+
+z2 = Zawodnik(1.8, 80, "Karol")
+print(z2)
+
+Zawodnik.nie_uzywam_atrybutow("Hello")
+z2.nie_uzywam_atrybutow("Hello world")
+
+
+z3 = Zawodnik.create_from_string("176;150;Paweł")
+print(z3)
+
+
+list_zawodnikow = Zawodnik.create_from_file("dane.txt")
+print(list_zawodnikow[0])
+
+
+
+
+
+
+
+
+
+
+class MathUtils:
+    @staticmethod
+    def add(x, y):
+        return x + y
+
+    @staticmethod
+    def multiply(x, y):
+        return x * y
+
+
+MathUtils.add(2,2)
