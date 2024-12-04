@@ -73,4 +73,13 @@ if __name__ == '__main__':
 
     #  Stworz generator ktory bedzie przyjmowal przez parametr ilosc elementow a nastepnie zwracal elementy o tresci
     #  f'element o indeksie {x}'( gdzie x bedzie numerem podawanego elementu) czekajac 1 sekunde przed zwrotem kazdego elementu.
-    
+    def generator_elementow(ilosc: int):
+        for i in range(ilosc):
+            time.sleep(1)
+            yield f'element o indeksie {i}'
+
+
+    genrator = generator_elementow(3)
+    print(next(genrator))
+    next(genrator)
+    print(next(genrator))
