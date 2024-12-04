@@ -81,7 +81,14 @@ class TreeNode:
         self.right = right
 
 
-tree = TreeNode(1, TreeNode(2, TreeNode(4), TreeNode(5)), TreeNode(3, None, TreeNode(6)))
+tree = TreeNode(1,
+                TreeNode(2,
+                                TreeNode(4),
+                                TreeNode(5)),
+
+                TreeNode(3,
+                            None,
+                                TreeNode(6)))
 
 
 class TreeIterator:
@@ -192,6 +199,14 @@ class ListaZawodnikow:
                     self.zawodnicy.append(Zawodnik(masa=float(waga), wzrost=float(wzrost), imie=imie))
         self.index = 0
 
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index == len(self.zawodnicy):
+            raise StopIteration
+        self.index += 1
+        return self.zawodnicy[self.index - 1]
 
 
 
