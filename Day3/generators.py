@@ -69,3 +69,8 @@ if __name__ == '__main__':
     stream = data_stream()
     for _ in range(5):
         print(next(stream))  # Symuluje odbiór danych co sekundę
+
+
+    #  Stworz generator ktory bedzie przyjmowal przez parametr ilosc elementow a nastepnie zwracal elementy o tresci
+    #  f'element o indeksie {x}'( gdzie x bedzie numerem podawanego elementu) czekajac 1 sekunde przed zwrotem kazdego elementu.
+    
