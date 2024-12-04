@@ -1,0 +1,42 @@
+Pylint and Flake8
+
+Pylint is a tool that checks for errors in Python. It tries to enforce a coding standard and looks for code smells.
+It can also look for certain type errors, it can recommend suggestions about how particular blocks can be refactored,
+and can offer you details about the code’s complexity.
+
+
+Flake8 is a Python library that wraps PyFlakes, pycodestyle and Ned Batchelder’s McCabe script.
+It is a great toolkit for checking your code base against coding style (PEP8),
+programming errors like “library imported but unused”, “Undefined name” and code which is not indented.
+
+
+Black   ### https://www.freecodecamp.org/news/auto-format-your-python-code-with-black/
+
+pip install black
+
+Run in terminal
+black filename.py
+Exact example
+black fire_example.py
+
+
+MyPy
+
+pip install mypy
+
+
+Why mypy?
+
+Compile-time type checking
+Static typing makes it easier to find bugs with less debugging.
+
+Easier maintenance
+Type declarations act as machine-checked documentation. Static typing makes your code easier to understand and easier to modify without introducing bugs.
+
+Grow your programs from dynamic to static typing
+You can develop programs with dynamic typing and add static typing after your code has matured, or migrate existing Python code to static typing.
+
+
+Pre-commit
+
+https://pre-commit.com/

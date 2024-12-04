@@ -68,3 +68,28 @@ def is_even(n):
     Zwraca True, jeśli liczba jest parzysta, False w przeciwnym przypadku.
     """
     return n % 2 == 0
+
+
+
+def fetch_data():
+    response = requests.get("https://example.com/api/data")
+    return response.text
+
+
+
+baza = []
+
+def loadDB():
+    print("############## ŁADOWANIE BAZY ##############")
+    global baza
+    baza = [(1, "Marian"), (2, "Czesław"), (3, "Zenon"), (4, "Florian")]
+
+
+def getData():
+    global baza
+    return baza
+
+
+def getOne(index: int):
+    global baza
+    return baza[index]

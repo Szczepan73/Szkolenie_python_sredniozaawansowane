@@ -1,7 +1,8 @@
 import pytest
 import sys
 
-from Day3.PyTest_examples.code_pytest import sumuj, dajCyfry, is_palindrome, calculate_average, calculate_percentage
+from Day3.PyTest_examples.code_pytest import (sumuj, dajCyfry, is_palindrome, calculate_average, calculate_percentage,
+                                              is_even, loadDB, getOne, getData)
 
 def test_sumuj():
     assert sumuj(2,2) == 4
@@ -116,3 +117,73 @@ def test_not_on_windows():
 @pytest.mark.skipif(sys.version_info < (3, 9), reason="Wymaga Pythona 3.9 lub wyższej")
 def test_requires_python_39():
     assert True
+
+
+
+@pytest.mark.parametrize(
+    "number",  # Parametry: liczba wejściowa
+    [
+        2, 4, 0, -2
+    ]
+)
+def test_is_even_true(number):
+    assert is_even(number) == True
+
+
+@pytest.mark.parametrize(
+    "number, expected",  # Parametry: liczba wejściowa i oczekiwany wynik
+    [
+        (1, False),
+        (7, False),
+        (-3, False),
+    ]
+)
+def test_is_even_false(number, expected):
+    assert is_even(number) == expected
+
+
+
+# def setup_module():
+#     print("\n############## setup ##############")
+#     loadDB()
+#
+# def teardown_module():
+#     print("\n############## bye ##############")
+#
+# def test_getOne():
+#     assert getOne(0)[1]=='Marian'
+#
+# def test_getData():
+#     assert len(getData()) > 0
+
+
+
+@pytest.fixture(scope="module", autouse=True)
+def setup_and_teardown():
+    print("\n############## setup ##############")
+    loadDB()
+    yield
+    print("\n############## bye ##############")
+
+
+def test_getData():
+    assert len(getData()) > 0
+
+
+def test_getOne():
+    assert getOne(0)[1] == 'Marian'
+
+
+@pytest.fixture(scope="function")
+def example_fixture():
+    print("\nSetup: Przygotowanie zasobów")
+    data = {"key": "value"}
+    yield data
+    print("\nTeardown: Sprzątanie po teście")
+
+# Testy współdzielą tę samą fixture (ponieważ scope='module')
+def test_example_1(example_fixture):
+    assert example_fixture["key"] == "value"
+
+def test_example_2(example_fixture):
+    assert example_fixture["key"] == "value"
